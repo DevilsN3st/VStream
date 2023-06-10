@@ -1,4 +1,5 @@
 import { usePost } from "../contexts/PostContext"
+import { useUser } from "../contexts/UserContext"
 import { useAsyncFn } from "../hooks/useAsync"
 import { createComment } from "../services/comments"
 import { CommentForm } from "./CommentForm"
@@ -7,17 +8,19 @@ import VideoPlayer from "./VideoPlayer"
 
 export function Post() {
   const { post, rootComments, createLocalComment } = usePost()
+  const{user} = useUser()
+  // console.log(userId  )
   const { loading, error, execute: createCommentFn } = useAsyncFn(createComment)
 
   function onCommentCreate(message) {
-    return createCommentFn({ postId: post.id, message }).then(
+    return createCommentFn({ postId: post?.id, message, user }).then(
       createLocalComment
     )
   }
 
   return (
     <>
-        {post?.video.id && <VideoPlayer videoId = {post?.video.id}/>}
+        {post?.video.id && <VideoPlayer videoId = {post?.video.fileName}/>}
       <h1>{post.title}</h1>
       <article>{post.body}</article>
       <h3 className="comments-title">Comments</h3>

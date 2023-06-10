@@ -1,9 +1,9 @@
 import { makeRequest } from "./makeRequest"
 
-export function createComment({ postId, message, parentId }) {
+export function createComment({ postId, message, parentId, user }) {
   return makeRequest(`posts/${postId}/comments`, {
     method: "POST",
-    data: { message, parentId },
+    data: { message, parentId, user },
   })
 }
 
