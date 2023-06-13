@@ -38,7 +38,7 @@ function NewVideo() {
     // var formElement = document.getElementById("video-upload");
     try{
       var request = new XMLHttpRequest();
-      request.open("POST", "http://localhost:4000/videos", true);
+      request.open("POST", "http://localhost:4000/videos/videos", true);
       request.onload = onComplete;
       request.upload.onprogress = fileUploadPercentage;
       // const data = new FormData(formElement);

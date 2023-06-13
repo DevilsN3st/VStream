@@ -4,14 +4,14 @@ import ReactPlayer from "react-player";
 const VideoPlayer = ({ videoId }) => {
   // const[videoId, setVideoId] = useState(videoId);
   const [videoUrl, setVideoUrl] = useState(
-    `http://localhost:4000/video/${videoId}`
+    `http://localhost:4000/videos/${videoId}`
   );
   const [videoData, setVideoData] = useState({});
 
   useEffect(() => {
     const fetchVideo = async () => {
       try {
-        const res = await fetch(`http://localhost:4000/video/${videoId}/data`);
+        const res = await fetch(`http://localhost:4000/videos/${videoId}/data`);
         const data = await res.json();
         // console.log("data",data);
         setVideoData(data);
