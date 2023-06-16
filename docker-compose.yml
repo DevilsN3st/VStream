@@ -1,0 +1,56 @@
+version: '3.9'
+services:
+  postgres:
+    image: "postgres:latest"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: "password"
+    ports:
+      - '5435:5432'
+    volumes: 
+      - postgres:/var/lib/postgresql/data
+  redis:
+    image: 'redis:alpine'
+    ports:
+      - '6380:6379'
+  server:
+    restart: on-failure
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./server
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    ports:
+      - '4000:4000'
+    depends_on:
+      - postgres
+      - redis
+  nginx:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - "3050:80"
+    depends_on:
+    - server
+    - client
+  client:
+    stdin_open: true
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    depends_on:
+      - server
+  
+
+volumes:
+  postgres:
+    driver: local
+
+# networks:
+#   video-network:
+#     driver: bridge

@@ -8,7 +8,7 @@ const path = require("path");
 
 const {commitToDb} = require("../services/commit-to-db");
 
-// const  redisClient  = require("../utils/redis-instance");
+const  redisClient  = require("../utils/redis-instance");
 
 const router = express.Router();
 
@@ -31,34 +31,34 @@ router.get("/:id/poster", function (req, res) {
 });
 
 // endpoint to fetch a single video's metadata
-// router.get("/:id/data", async function (req, res) {
-//   // if( redisClient.connected == false) console.log("redis not connected");
-//   try{
+router.get("/:id/data", async function (req, res) {
+  // if( redisClient.connected == false) console.log("redis not connected");
+  try{
 
-//     await redisClient.get(`videoData:${req.params.id}-data`)
-//     .then(( videoData) =>{
-//       // console.log("here inside the redis");
-//       if(videoData != null) {
-//         console.log("videodata from redis");
-//         return res.json(JSON.parse(videoData));
-//       }
-//       else{
-//         (async() =>{
-//         const videoData = await prisma.video.findMany({
-//           where: { fileName: req.params.id },
-//         });
-//         console.log("videodata from db");
-//         // console.log(videoData);
-//         redisClient.set(`videoData:${req.params.id}-data`, JSON.stringify(videoData))
-//       })();
-//         res.json(videoData);
-//       }
-//     })
-//   }
-//   catch (error ) {
-//     console.log(error);
-//   }
-//   });
+    await redisClient.get(`videoData:${req.params.id}-data`)
+    .then(( videoData) =>{
+      // console.log("here inside the redis");
+      if(videoData != null) {
+        console.log("videodata from redis");
+        return res.json(JSON.parse(videoData));
+      }
+      else{
+        (async() =>{
+        const videoData = await prisma.video.findMany({
+          where: { fileName: req.params.id },
+        });
+        console.log("videodata from db");
+        // console.log(videoData);
+        redisClient.set(`videoData:${req.params.id}-data`, JSON.stringify(videoData))
+      })();
+        res.json(videoData);
+      }
+    })
+  }
+  catch (error ) {
+    console.log(error);
+  }
+  });
 
 router.get("/:id", async function (req, res) {
   const path = `assets/${req.params.id}`;
@@ -89,7 +89,7 @@ router.get("/:id", async function (req, res) {
         // else{
           file = fs.createReadStream(path, { start, end });
           console.log("video served from server");
-          // redisClient.set(`video:${req.params.id}-${start}-${end}`, JSON.stringify(file))
+          redisClient.set(`video:${req.params.id}-${start}-${end}`, JSON.stringify(file))
         // }
         const head = {
           "Content-Range": `bytes ${start}-${end}/${fileSize}`,

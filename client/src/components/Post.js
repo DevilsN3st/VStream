@@ -17,7 +17,7 @@ export function Post() {
       createLocalComment
     )
   }
-
+  console.log(post?.video?.fileName);
   return (
     <>
         {post?.video.id && <VideoPlayer videoId = {post?.video.fileName}/>}

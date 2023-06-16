@@ -21,7 +21,6 @@ const COMMENT_SELECT_FIELDS = {
 };
 
 router.get("/", async (req, res) => {
-  console.log("GET /posts");
   const posts = await prisma.post.findMany();
   // console.log("posts", posts);
   res.json(posts);

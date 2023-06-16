@@ -6,6 +6,7 @@ const cors = require("cors");
 
 const dotenv = require("dotenv");
 dotenv.config();
+
 const bodyParser = require("body-parser");
 
 const prisma = require("./utils/prisma-instance");
@@ -19,7 +20,7 @@ app.use(express.json());
 // app.use(bodyParser.text({type: '/'}));
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({ origin: "http://localhost:3050", credentials: true }));
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 const cookieParser = require("cookie-parser");
 
@@ -31,7 +32,6 @@ const videoRouter = require("./routes/videos-route");
 const postRouter = require("./routes/posts-route");
 
 app.get("/", async (req, res) => {
-  console.log("GET /");
   const CURRENT_USER = await prisma.user.findFirst(
     { where: { name: "Kyle" } },
     { select: { id: true } }
@@ -40,7 +40,6 @@ app.get("/", async (req, res) => {
   res.cookie("userId", CURRENT_USER);
   res.json({ user: CURRENT_USER });
 });
-
 
 app.use("/videos", videoRouter);
 app.use("/posts", postRouter);
