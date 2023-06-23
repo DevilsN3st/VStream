@@ -17,10 +17,12 @@ function NewVideo() {
     error,
     value: posts,
   } = useAsync(() => getPosts(userId), [userId]);
+  const [postId, setPostId] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const file = event.target.elements[0];
+    const file = event.target.elements[1];
+    // console.log("files uploaded",event.target.elements[1]);
     if (validateForm(file)) {
       uploadVideo(event.target);
     }
@@ -54,7 +56,8 @@ function NewVideo() {
       console.log(formData);
       const data = new FormData();
       data.append("userId", userId);
-      data.append("user-file", formData.elements[0].files[0]);
+      data.append("postId", postId);
+      data.append("user-file", formData.elements[1].files[0]);
       console.log("userId", userId);
       console.log("data", data);
       request.send(data);
@@ -102,17 +105,13 @@ function NewVideo() {
               className="form-select"
               id="title"
               aria-label="Default select example"
+              onChange={(e) => setPostId(e.target.value)}
             >
               {posts.map((post) => (
                 <option value={post.id} key={post.id}>
-                  {" "}
-                  {post.title}{" "}
+                  {post.title}
                 </option>
               ))}
-              {/* <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option> */}
             </select>
           </div>
           <div className="input-group mb-3">

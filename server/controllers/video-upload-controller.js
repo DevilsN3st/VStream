@@ -12,7 +12,7 @@ const uploadVideo = function (req, res, next) {
       description: req.file.originalname,
       userId: req.body.userId,
       fileName: req.file.filename,
-      postId: "b4c55f46-047d-41ab-965a-16cf23c5410b",
+      postId: req.body.postId,
       duration: "2 min",
       poster: "fsdafsd",
     };
