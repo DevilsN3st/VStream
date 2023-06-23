@@ -11,14 +11,21 @@ export function PostList() {
 
   return (
     <>
-      <Link to={"/create-post"}>Create Post</Link>
+    <div className="container p-2">
+
+      {/* <Link to={"/create-post"}>Create Post</Link> */}
       {posts.map((post) => {
         return (
-          <h1 key={post.id}>
-            <Link to={`/posts/${post.id}`}>{post.title}</Link>
-          </h1>
+          <div className="card mt-2 p-2" key={post.id} style={{width: '20rem'}}>
+            <div className="card-body">
+              <h5 className="card-title" >
+                <Link to={`/posts/${post.id}`}>{post.title}</Link>
+              </h5>
+            </div>
+          </div>
         );
       })}
+      </div>
     </>
   );
 }

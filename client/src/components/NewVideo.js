@@ -1,42 +1,51 @@
-import { useState } from 'react'
-import { useUser } from "../contexts/UserContext"
+import { useState } from "react";
+import { useUser } from "../contexts/UserContext";
+import axios from "axios";
+import { useAsync } from "../hooks/useAsync";
+import { getPosts } from "../services/posts";
 
+// import { useAsyncFn } from "../hooks/useAsync"
+// import { makeRequest } from "../services/makeRequest";
 
 function NewVideo() {
-
-    const[customMessage, setCustomMessage] = useState('');
-    const { user } = useUser();
-    const userId = user?.id;
-
+  const [customMessage, setCustomMessage] = useState("");
+  const { user } = useUser();
+  // const [posts, setPosts] = useState([]);
+  const userId = user?.id;
+  const {
+    loading,
+    error,
+    value: posts,
+  } = useAsync(() => getPosts(userId), [userId]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const file = event.target.elements[0];
-    if(validateForm(file)) {
+    if (validateForm(file)) {
       uploadVideo(event.target);
     }
   };
-  
+
   function validateForm(formData) {
     const uploadedFile = formData.files[0];
     // console.log("valForm",uploadedFile);
-    if(!uploadedFile) {
-      setCustomMessage( "Please select a video to upload");
+    if (!uploadedFile) {
+      setCustomMessage("Please select a video to upload");
       return false;
     }
     const fileLimit = 104857600;
-    if(uploadedFile.size > fileLimit) {
+    if (uploadedFile.size > fileLimit) {
       setCustomMessage("Maximum video size allowed: 100MB");
       return false;
     }
     return true;
   }
-  
+
   async function uploadVideo(formData) {
     // document.getElementById("submit").disabled = true;
-    setCustomMessage('uploading video..')
+    setCustomMessage("uploading video..");
     // var formElement = document.getElementById("video-upload");
-    try{
+    try {
       var request = new XMLHttpRequest();
       request.open("POST", "http://localhost:4000/videos/videos", true);
       request.onload = onComplete;
@@ -46,28 +55,26 @@ function NewVideo() {
       const data = new FormData();
       data.append("userId", userId);
       data.append("user-file", formData.elements[0].files[0]);
-      console.log('userId',userId);
-      console.log('data',data);
+      console.log("userId", userId);
+      console.log("data", data);
       request.send(data);
-
-    }
-    catch(err) {
+    } catch (err) {
       console.log(err);
     }
   }
-  
+
   function onComplete(event) {
     const response = JSON.parse(event.currentTarget.response);
-    if(response.success) {
-      setCustomMessage(`Video Uploaded successfully!!.`)
+    if (response.success) {
+      setCustomMessage(`Video Uploaded successfully!!.`);
       // Please <a href=${response.link +}>click here</a> to view the video.`);
     } else {
-      setCustomMessage( response.error);
+      setCustomMessage(response.error);
       // customMessage.style.color = 'red';
     }
     // document.getElementById("submit").disabled = false;
   }
-  
+
   function fileUploadPercentage(e) {
     if (e.lengthComputable) {
       // var customMessage = document.getElementById('message');
@@ -76,14 +83,56 @@ function NewVideo() {
     }
   }
 
+  if (loading) return <div> Loading </div>;
+  if (error) return <h1 className="error-msg">{error}</h1>;
+
+  // console.log("new video component", posts);
+
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        Select file to upload:
-        <input type="file" accept ="video/mp4" name="user-file" />
-        <input type="submit" />
-      </form>
-      {customMessage}
+      <div className="container-sm mt-2 p-2">
+        <form onSubmit={handleSubmit}>
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon1">
+              <label htmlFor="title" className="form-label">
+                Post
+              </label>
+            </span>
+            <select
+              className="form-select"
+              id="title"
+              aria-label="Default select example"
+            >
+              {posts.map((post) => (
+                <option value={post.id} key={post.id}>
+                  {" "}
+                  {post.title}{" "}
+                </option>
+              ))}
+              {/* <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option> */}
+            </select>
+          </div>
+          <div className="input-group mb-3">
+            {/* <label className="input-group-text" for="inputGroupFile01"> Select file to upload:</label> */}
+            <input
+              type="file"
+              accept="video/mp4"
+              className="form-control"
+              id="inputGroupFile01"
+              name="user-file"
+            />
+          </div>
+          <div className="input-group mb-3">
+            <button type="submit" className="btn btn-primary">
+              Add Video to the post
+            </button>
+          </div>
+        </form>
+        {customMessage}
+      </div>
     </>
   );
 }

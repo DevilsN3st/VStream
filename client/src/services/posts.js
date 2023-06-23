@@ -1,7 +1,7 @@
 import { makeRequest } from "./makeRequest"
 
-export function getPosts() {
-  return makeRequest("/posts")
+export function getPosts(id) {
+  return makeRequest(`/posts?user=${id}`)
 }
 
 export function getPost(id) {

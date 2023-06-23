@@ -26,6 +26,19 @@ services:
     depends_on:
       - postgres
       - redis
+  server1:
+    restart: on-failure
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./server
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    ports:
+      - '4001:4000'
+    depends_on:
+      - postgres
+      - redis
   nginx:
     build:
       dockerfile: Dockerfile.dev

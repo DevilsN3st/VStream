@@ -3,7 +3,7 @@
 
 // const redisClient = Redis.createClient({
 //   host: 'redis',
-//   port: 6380
+//   port: 6379
 // });
 
 
