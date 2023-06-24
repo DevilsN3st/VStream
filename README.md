@@ -1,5 +1,7 @@
 # VStream
 A video Streaming app which uses Node Stream to serve video in chunks.
+Anyone can start as a guest user and browse which is already logged in.
+
 
 Tech Stack Used -
 
@@ -28,9 +30,7 @@ Used PostgreSQL as DB and Prisma as ORM to store data.
 # Next Steps
 
 - [ ] Add User Authentication and Authorization
-- [ ] Fix redix caching issue
+- [ ] Fix redis caching issue
 - [ ] Add more features like like, dislike, comment, share, etc
-- [ ] Fix nginx load balancing issue
-- [ ] improve UI/UX
 
 
