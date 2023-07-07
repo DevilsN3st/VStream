@@ -30,7 +30,7 @@ Used PostgreSQL as DB and Prisma as ORM to store data.
 # Next Steps
 
 - [ ] Add User Authentication and Authorization
-- [ ] Fix redis caching issue
+- [ ] Add Caching to other features
 - [ ] Add more features like like, dislike, comment, share, etc
 
 
