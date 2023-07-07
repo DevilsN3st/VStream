@@ -1,10 +1,10 @@
-// const Redis = require('redis');
+const Redis = require('redis');
 
 
-// const redisClient = Redis.createClient({
-//   host: 'redis',
-//   port: 6379
-// });
+const redisClient = Redis.createClient({
+  host: 'redis',
+  port: 6379
+});
 
 
 // (async () => {
@@ -14,4 +14,4 @@
 // redisClient.on('connect', () => console.log('Redis Client Connected'));
 // redisClient.on('error', (err) => console.log('Redis Client Connection Error', err));
 
-// module.exports = redisClient;
+module.exports = redisClient;

@@ -9,20 +9,20 @@ const VideoPlayer = ({ videoId }) => {
   const [videoData, setVideoData] = useState({});
   // console.log(videoId);
 
-  // useEffect(() => {
-  //   const fetchVideo = async () => {
-  //     try {
-  //       const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/videos/${videoId}/data`);
-  //       const data = await res.json();
-  //       console.log("data",data);
-  //       setVideoData(data);
-  //       // setVideoUrl(data.id);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchVideo();
-  // }, []);
+  useEffect(() => {
+    const fetchVideo = async () => {
+      try {
+        const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/videos/${videoId}/data`);
+        const data = await res.json();
+        console.log("data",data);
+        setVideoData(data);
+        // setVideoUrl(data.id);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchVideo();
+  }, []);
 
   return (
     <>

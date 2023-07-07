@@ -2,7 +2,7 @@
 const prisma = require("../utils/prisma-instance");
 const thumbsupply = require("thumbsupply");
 
-// const  redisClient  = require("../utils/redis-instance");
+const  redisClient  = require("../utils/redis-instance");
 
 
 const getAllVideos = async function (req, res) {
@@ -21,34 +21,35 @@ const getVideoCaptions = function (req, res) {
       .catch((err) => console.log(err));
   }
 
-// const getVideoMetaData = async function (req, res) {
-    //   // if( redisClient.connected == false) console.log("redis not connected");
-    //   try{
+const getVideoMetaData = async function (req, res) {
+      // if( redisClient.connected == false) console.log("redis not connected");
+      try{
     
-    //     await redisClient.get(`videoData:${req.params.id}-data`)
-    //     .then(( videoData) =>{
-    //       // console.log("here inside the redis");
-    //       if(videoData != null) {
-    //         console.log("videodata from redis");
-    //         return res.json(JSON.parse(videoData));
-    //       }
-    //       else{
-    //         (async() =>{
-    //         const videoData = await prisma.video.findMany({
-    //           where: { fileName: req.params.id },
-    //         });
-    //         console.log("videodata from db");
-    //         // console.log(videoData);
-    //         redisClient.set(`videoData:${req.params.id}-data`, JSON.stringify(videoData))
-    //       })();
-    //         res.json(videoData);
-    //       }
-    //     })
-    //   }
-    //   catch (error ) {
-    //     console.log(error);
-    //   }
-    //   }
+        redisClient.get(`videoData:${req.params.id}-data`, (err, videoData) => {
+        // .then(( videoData) =>{
+          console.log("here inside the redis");
+          if(videoData != null) {
+            console.log("videodata from redis");
+            return res.json(JSON.parse(videoData));
+          }
+          else{
+            (async() =>{
+            const videoData = await prisma.video.findMany({
+              where: { fileName: req.params.id },
+            });
+            console.log("videodata from db");
+            // console.log(videoData);
+            redisClient.set(`videoData:${req.params.id}-data`, JSON.stringify(videoData))
+          })();
+            res.json(videoData);
+          }
+        })
+      }
+      catch (error ) {
+        console.log("redis not connected");
+        console.log(error);
+      }
+      }
 
 
-module.exports = { getAllVideos, getVideoCaptions, getVideoThumbnail };
+module.exports = { getAllVideos, getVideoCaptions, getVideoThumbnail, getVideoMetaData };

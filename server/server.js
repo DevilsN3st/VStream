@@ -11,6 +11,8 @@ const bodyParser = require("body-parser");
 const prisma = require("./utils/prisma-instance");
 const {commitToDb} = require("./services/commit-to-db");
 
+const  redisClient  = require("./utils/redis-instance");
+
 const multer = require("multer");
 
 const app = express();
