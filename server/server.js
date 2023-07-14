@@ -29,6 +29,11 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 
 multer().any();
 
+// const path = require('path')
+app.use('/static/videos', express.static(path.join(__dirname, 'assets')))
+
+
+
 const videoRouter = require("./routes/videos-route");
 const postRouter = require("./routes/posts-route");
 

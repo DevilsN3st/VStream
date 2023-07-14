@@ -5,8 +5,8 @@ Anyone can start as a guest user and browse which is already logged in.
 
 <br>
 <br>
- > 'earlier version of this app is available at previous commit - 9f71224'
- > it used to serve video using node.js and express.js only by pipeing the video stream to response object.
+ '>' 'earlier version of this app is available at previous commit - 9f71224'
+ '>' it used to serve video using node.js and express.js only by pipeing the video stream to response object.
 
 
 
@@ -21,27 +21,16 @@ Tech Stack Used -
 - Redis
 - Docker
 - Nginx
+- ffmpeg
 
 
 # Frontend
 Used React.js for frontend and Context Api for state management.
 
 # Backend
-Used Node.js and Express.js for backend server to process the request and response of client. 
-<br>
-Use of HLS ( HTTP Live Streaming ) for streaming video.
-<br>
-Used ffmpeg for converting mp4 video to HLS ( .m3u8 ) format.
-<br>
-Used Redis for caching data from server.
-<br>
-
-# DevOps
-Used Docker for containerization.
-<br>
-Used Nginx for reverse proxy and load balancing.
-<br>
-
+Used Node.js and Express.js for backend. 
+Used NodeJs Stream to serve video in chunks.
+Used Redis for caching and Nginx for load balancing.
 
 # Data
 Used PostgreSQL as DB and Prisma as ORM to store data.
