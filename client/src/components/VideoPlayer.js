@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import ReactPlayer from "react-player";
+import { Replay } from 'vimond-replay';
+import 'vimond-replay/index.css';
+import HlsjsVideoStreamer from 'vimond-replay/video-streamer/hlsjs';
 
 const VideoPlayer = ({ videoId }) => {
   // const[videoId, setVideoId] = useState(videoId);
@@ -41,7 +44,7 @@ const VideoPlayer = ({ videoId }) => {
 
   return (
     <>
-      <ReactPlayer
+      {/* <ReactPlayer
         url={videoUrl}
         controls
         playing
@@ -59,7 +62,15 @@ const VideoPlayer = ({ videoId }) => {
             {level.bitrate}
           </option>
         ))}
-      </select>
+      </select> */}
+
+    <Replay
+      source={videoUrl}
+      initialPlaybackProps={{ isPaused: true }}
+    >
+      <HlsjsVideoStreamer />
+    </Replay>
+
     </>
   );
 };
