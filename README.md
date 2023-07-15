@@ -1,6 +1,8 @@
 # VStream - 2 
-A video Streaming app which uses HLS to serve video.
+A video Streaming app which uses HLS ( HTTP Live Streaming ) to serve video with adaptive bitrate support.
 Anyone can start as a guest user and browse which is already logged in.
+Some Sample Videos and Users are already seeded in the database.
+Follow the below mentioned steps to run the app with seeded data.
 
 
 <br>
@@ -25,7 +27,6 @@ Tech Stack Used -
 - Redis
 - Docker
 - Nginx
-- ffmpeg
 
 
 # Frontend
