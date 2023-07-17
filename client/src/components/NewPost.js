@@ -8,17 +8,19 @@ const NewPost = () => {
   const navigate = useNavigate();
 
   const { user } = useUser();
-  const userId = user?.id;
-  // console.log(useUser());
+  const userId = user;
+  console.log("user at newPost",useUser().user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const post = { title, body, userId };
+    console.log("post", post);
 
     await fetch("http://localhost:4000/posts", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(post),
+      credentials: "include",
     })
       .then((data) => {
         data.json().then((res) => {

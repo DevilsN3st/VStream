@@ -14,7 +14,7 @@ export function PostList() {
     <div className="container p-2">
 
       {/* <Link to={"/create-post"}>Create Post</Link> */}
-      {posts.map((post) => {
+      {posts?.map((post) => {
         return (
           <div className="card mt-2 p-2" key={post.id} style={{width: '20rem'}}>
             <div className="card-body">

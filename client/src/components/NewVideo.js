@@ -10,8 +10,8 @@ import { getPosts } from "../services/posts";
 function NewVideo() {
   const [customMessage, setCustomMessage] = useState("");
   const { user } = useUser();
-  // const [posts, setPosts] = useState([]);
-  const userId = user?.id;
+  const userId = user;
+  
   const {
     loading,
     error,

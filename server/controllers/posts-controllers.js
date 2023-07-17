@@ -46,13 +46,14 @@ const COMMENT_SELECT_FIELDS = {
   }
 
   const addPost = async (req, res) => {
-    // console.log("req.body", req.body);
+    console.log("req.body", req.body);
     if (req.body.title === "" || req.body.title == null) {
       return res.status(400).json("Title is required");
     }
     if (req.body.body === "" || req.body.body == null) {
       return res.status(400).json("Body is required");
     }
+    console.log("req.cookie", req.cookie );
     return await commitToDb(
       prisma.post.create({
         data: {

@@ -52,13 +52,13 @@ COOKIE_SECRET="some-secret"
 - Make sure you have docker and docker-compose installed
 - Run `docker-compose up --build` to build and run the containers
 - Once the docker Containers are up and running, open the terminal of server container and run `prisma migrate dev` to migrate the database schema
-- On same terminal run `prisma generate` to generate prisma and `prisma db seed` to seed the database
+- On same terminal run `prisma generate` to generate prisma 
+-  `prisma db seed` to seed the database ( optional for seeded data )
 - Open `localhost:3050` in browser to see the app running
 
 
 # Next Steps
 
-- [ ] Add User Authentication and Authorization
 - [ ] Add Caching to other features
 - [ ] Add more features like like, dislike, comment, share, etc
 - [ ] Add multiple quality options for video

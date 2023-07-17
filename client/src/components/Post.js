@@ -8,8 +8,9 @@ import VideoPlayer from "./VideoPlayer"
 
 export function Post() {
   const { post, rootComments, createLocalComment } = usePost()
-  const{user} = useUser()
-  // console.log(userId  )
+  const user1 = useUser();
+  const user = user1?.user;
+  console.log("user from post", user1 )
   const { loading, error, execute: createCommentFn } = useAsyncFn(createComment)
 
   function onCommentCreate(message) {
@@ -20,16 +21,16 @@ export function Post() {
   console.log(post?.video?.fileName);
   return (
     <>
-        {post?.video.id && <VideoPlayer videoId = {post?.video.fileName}/>}
+        {post?.video?.id && <VideoPlayer videoId = {post?.video.fileName}/>}
       <h1>{post.title}</h1>
       <article>{post.body}</article>
       <h3 className="comments-title">Comments</h3>
       <section>
-        <CommentForm
+        {user !== undefined ? <CommentForm
           loading={loading}
           error={error}
           onSubmit={onCommentCreate}
-        />
+        /> : <div> Login to comment </div>}
         {rootComments != null && rootComments.length > 0 && (
           <div className="mt-4">
             <CommentList comments={rootComments} />

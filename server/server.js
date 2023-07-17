@@ -36,18 +36,20 @@ app.use('/static/videos', express.static(path.join(__dirname, 'assets')))
 
 const videoRouter = require("./routes/videos-route");
 const postRouter = require("./routes/posts-route");
+const userRouter = require("./routes/users-route");
 
-app.get("/", async (req, res) => {
-  console.log("GET /");
-  const CURRENT_USER = await prisma.user.findFirst(
-    { where: { name: "Kyle" } },
-    { select: { id: true } }
-  );
-  console.log("CURRENT_USER_ID", CURRENT_USER);
-  res.cookie("userId", CURRENT_USER);
-  res.json({ user: CURRENT_USER });
-});
+// app.get("/", async (req, res) => {
+//   console.log("GET /");
+//   const CURRENT_USER = await prisma.user.findFirst(
+//     { where: { name: "Kyle" } },
+//     { select: { id: true } }
+//   );
+//   console.log("CURRENT_USER_ID", CURRENT_USER);
+//   res.cookie("userId", CURRENT_USER);
+//   res.json({ user: CURRENT_USER });
+// });
 
+app.use("/users", userRouter);
 
 app.use("/videos", videoRouter);
 app.use("/posts", postRouter);

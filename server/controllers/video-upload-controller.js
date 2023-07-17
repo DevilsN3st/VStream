@@ -128,6 +128,7 @@ const saveToDB = (req, res, next) => {
     duration: "2 min",
     poster: "fsdafsd",
   };
+  console.log("data from video uploader", data);  
   if (req.file) {
     prisma.video
       .create({

@@ -6,7 +6,8 @@ COPY ./ ./
 RUN npm i --legacy-peer-deps
 RUN npm install nodemon
 RUN npm install -g prisma
-RUN prisma generate
+# RUN prisma migrate dev
+# RUN prisma generate
 # RUN prisma db seed 
 # RUN redis-server --daemonize yes
 # EXPOSE 4000
