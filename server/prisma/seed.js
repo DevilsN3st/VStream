@@ -5,8 +5,8 @@ async function seed() {
   await prisma.post.deleteMany()
   await prisma.user.deleteMany()
   await prisma.video.deleteMany()
-  const kyle = await prisma.user.create({ data: { name: "Kyle", email: "kyle@email.com" } })
-  const sally = await prisma.user.create({ data: { name: "Sally", email: "sally@email.com" } })
+  const kyle = await prisma.user.create({ data: { name: "Kyle", email: "kyle@email.com", password:"abcdefgh" } })
+  const sally = await prisma.user.create({ data: { name: "Sally", email: "sally@email.com", password:"abcdefgh" } })
 
   const post1 = await prisma.post.create({
     data: {

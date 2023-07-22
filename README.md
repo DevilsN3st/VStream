@@ -8,8 +8,7 @@ Follow the below mentioned steps to run the app with seeded data.
 <br>
 <blockquote><p>
  earlier version of this app is available at previous commit - 9f71224
-</p></blockquote>
-<blockquote><p>
+</p><p>
  it used to serve video using node.js and express.js only by pipeing the video stream to response object.
 </p></blockquote>
 <br>
@@ -27,6 +26,9 @@ Tech Stack Used -
 - Redis
 - Docker
 - Nginx
+
+# System Design 
+![Client](https://github.com/DevilsN3st/VStream/assets/91787765/c7c7ec28-f4af-4787-8672-9729f06b67a2)
 
 
 # Frontend
@@ -60,6 +62,8 @@ COOKIE_SECRET="some-secret"
 # Next Steps
 
 - [ ] Add Caching to other features
-- [ ] Add more features like like, dislike, comment, share, etc
-- [ ] Add multiple quality options for video
-- [ ] Add more features to video player like playback speed, etc
+- [ ] Add further Features for User interaction
+- [ ] Add Tests
+- [ ] Add Messaging queue for better performance
+- [ ] Add CI/CD
+  
