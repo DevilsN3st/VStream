@@ -41,26 +41,38 @@ Used React.js for frontend and Context Api for state management.
 
 # Backend
 Used Node.js and Express.js for backend. 
-Used NodeJs Stream to serve video in chunks.
-Used Redis for caching and Nginx for load balancing.
+<br/>
+Used ffmpeg for video processing and generating thumbnails. 
+<br/>
+Used HTTP Live Streaming to serve videos.
+<br/>
+Used Nginx for load balancing among multiple servers using round robin.
 
 # Data
 Used PostgreSQL as DB and Prisma as ORM to store data.
+<br/>
+Used Redis for Caching data.
 
 
 # How to run
+Setting up with the project -
 - Clone the repo
-- Add .env file in root directory with following variables
+- Add .env file in server directory with following variables
 ```
 DATABASE_URL="postgresql://postgres:postgres@postgres:5432/postgres"
 REDIS_URL="redis://redis:6379"
 COOKIE_SECRET="some-secret"
 ```
 - Make sure you have docker and docker-compose installed
-- Run `docker-compose up --build` to build and run the containers
+- Run `docker-compose up --build` to build and run the containers.
+  
+Steps specific to database generation -
+
 - Once the docker Containers are up and running, open the terminal of server container and run `prisma migrate dev` to migrate the database schema
 - On same terminal run `prisma generate` to generate prisma 
 -  `prisma db seed` to seed the database ( optional for seeded data )
+
+Run locally -
 - Open `localhost:3050` in browser to see the app running
 
 
