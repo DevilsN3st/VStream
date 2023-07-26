@@ -4,11 +4,12 @@ Anyone can start as a guest user and browse which is already logged in.
 Some Sample Videos and Users are already seeded in the database.
 Follow the below mentioned steps to run the app with seeded data.
 
+This project is still work in progress. 
 
 <br>
 <blockquote><p>
- earlier version of this app is available at previous commit - 9f71224
-</p><p>
+ earlier version of this app is available at previous commit - 9f71224.
+ <br/>
  it used to serve video using node.js and express.js only by pipeing the video stream to response object.
 </p></blockquote>
 <br>
@@ -28,7 +29,11 @@ Tech Stack Used -
 - Nginx
 
 # System Design 
-![Client](https://github.com/DevilsN3st/VStream/assets/91787765/c7c7ec28-f4af-4787-8672-9729f06b67a2)
+![hld](https://github.com/DevilsN3st/VStream/assets/91787765/b082e97f-66a2-4b93-b86a-ea6cc2e2c926)
+
+
+Refer for the sytem design docs for better understanding of the system design.
+(https://docs.google.com/document/d/1HiN1NlHjuDLRCH4hdwejdsXADKgGZU9PtB5dKAOrRP8/edit?usp=sharing)
 
 
 # Frontend
