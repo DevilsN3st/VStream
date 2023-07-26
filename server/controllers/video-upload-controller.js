@@ -107,9 +107,10 @@ const convertToHLS = async (req, res, next) => {
       )}_master.m3u8`;
       const masterPlaylistPath = `./assets/hls/${newName}/${masterPlaylistFileName}`;
       fs.writeFileSync(masterPlaylistPath, masterPlaylist);
+      generateThumbnail(mp4FileName);
       console.log(`HLS master m3u8 playlist generated`);
 
-  console.log(`Deleting locally downloaded s3 mp4 file`);
+  console.log(`Deleting locally downloaded mp4 file`);
 
   saveToDB(req, res, next);
 
@@ -118,6 +119,19 @@ const convertToHLS = async (req, res, next) => {
   }
 };
 
+const generateThumbnail = (mp4FileName) => {
+  const filePath = `./assets/${mp4FileName}`;
+  const outputFolder = `./assets/thumbnails`;
+  const fileName = mp4FileName.replace(".mp4", "").replace(".", "_");
+    ffmpeg(filePath)
+        .screenshots({
+            timestamps: ["00:01"],
+            filename: `${fileName}.png`,
+            folder: `${outputFolder}`,
+            // size: '320x240',
+        })
+    return;
+}
 const saveToDB = (req, res, next) => {
   const data = {
     title: req.file.originalname,

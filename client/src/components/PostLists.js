@@ -14,17 +14,25 @@ export function PostList() {
     <div className="container p-2">
 
       {/* <Link to={"/create-post"}>Create Post</Link> */}
+      <div className="row justify-content-center ">
+
       {posts?.map((post) => {
         return (
+          <div className="col m-1" style={{width: '20rem'}}> 
           <div className="card mt-2 p-2" key={post.id} style={{width: '20rem'}}>
             <div className="card-body">
+                { post.video && post.video.poster &&
+                  <img className = "card-img-top" src={ `${process.env.REACT_APP_SERVER_URL}/static/videos/thumbnails/${post.video.poster}`} alt="thumbnail"/>
+                }
               <h5 className="card-title" >
                 <Link to={`/posts/${post.id}`}>{post.title}</Link>
               </h5>
             </div>
           </div>
+                </div>
         );
       })}
+      </div>
       </div>
     </>
   );

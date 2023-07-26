@@ -18,6 +18,7 @@ export function Post() {
       createLocalComment
     )
   }
+  console.log("post from post", post);
   console.log(post?.video?.fileName);
   return (
     <>

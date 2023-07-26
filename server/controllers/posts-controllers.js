@@ -28,7 +28,12 @@ const COMMENT_SELECT_FIELDS = {
       posts = await prisma.post.findMany({
         select:{
           title: true,
-          id: true
+          id: true,
+          video: {
+            select: {
+              poster: true,
+            },
+          },
         },
         where:{
           userId : req.query.user,
@@ -38,7 +43,17 @@ const COMMENT_SELECT_FIELDS = {
     }
     else{
       console.log("no user query present");
-      posts = await prisma.post.findMany();
+      posts = await prisma.post.findMany({
+        select:{
+          title: true,
+          id: true,
+          video: {
+            select: {
+              poster: true,
+            },
+          },
+        },
+      });
 
     }
     // console.log("posts", posts);
@@ -78,6 +93,7 @@ const COMMENT_SELECT_FIELDS = {
             select: {
               id: true,
               fileName: true,
+              poster: true,
             },
           },
           comments: {

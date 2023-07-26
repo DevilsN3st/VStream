@@ -57,7 +57,7 @@ async function seed() {
   
   const video1 = await prisma.video.create({
     data: {
-      poster: '/video/0/poster',
+      poster: 'user-file1689363522957-97750613.png',
       description: 'desc',
       duration: '3 mins',
       title: 'Sample 1',
@@ -68,7 +68,7 @@ async function seed() {
   })
   const video2 = await prisma.video.create({
     data: {
-      poster: '/video/1/poster',
+      poster: 'user-file1689363702838-36064671.png',
       description: 'desc',
       duration: '4 mins',
       title: 'Sample 2',
@@ -79,7 +79,7 @@ async function seed() {
   })
   const video3 = await prisma.video.create({
     data: {
-      poster: '/video/2/poster',
+      poster: 'user-file1689363748031-748429380.png',
       description: 'desc',
       duration: '2 mins',
       title: 'Sample 3',
